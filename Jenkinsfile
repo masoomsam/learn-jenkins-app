@@ -56,8 +56,8 @@ pipeline {
                 npx playwright test --reporter=html
                 '''
             }
-        } /*       
-        post {
+        }        
+/*        post {
         always {
             publishHTML([alloowMissing: false])
         }
