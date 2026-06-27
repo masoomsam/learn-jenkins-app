@@ -62,8 +62,7 @@ pipeline {
     
     post {
         always {
-            publishHTML(alloowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html'3, 
-            reportName: 'Playwright HEML Report', reportTitles: '', useWrapperFileDirectly: true)
+            publishHTML([alloowMissing: false])
         }
     }
     
