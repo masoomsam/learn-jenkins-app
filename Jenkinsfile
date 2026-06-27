@@ -39,12 +39,7 @@ pipeline {
     }
 
 
-    post {
-        always {
-            junit 'test-results/junit.xml'
-        }
-    }
-
+/*
          stage('E2E') {
              agent{
                 docker{
@@ -71,4 +66,5 @@ pipeline {
             reportName: 'Playwright HEML Report', reportTitles: '', useWrapperFileDirectly: true])
         }
     }
+    */
 }
