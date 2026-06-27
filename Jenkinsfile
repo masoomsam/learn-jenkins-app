@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+/*
     stages {
         stage('Build') {
             agent{
@@ -37,7 +37,7 @@ pipeline {
             }
         }        
     }
-
+*/
 
 /*
          stage('E2E') {
@@ -59,8 +59,7 @@ pipeline {
         } */       
         post {
         always {
-            publishHTML([alloowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', 
-            reportName: 'Playwright HEML Report', reportTitles: '', useWrapperFileDirectly: true])
+            publishHTML([alloowMissing: false])
         }
     }
 } 
