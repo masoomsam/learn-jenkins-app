@@ -31,20 +31,44 @@ pipeline {
             steps {
                 echo 'Test stage'
                 sh '''
-               # test -f build/index.html
+                test -f build/index.html
                 npm test
                 '''
             }
-        post {
+        }        
+    }
+
+
+    post {
         always {
             junit 'test-results/junit.xml'
         }
     }
+
+         stage('E2E') {
+             agent{
+                docker{
+                    image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                    reuseNode true
+                }
+            }
+            steps {
+                echo 'E2E'
+                sh '''
+                npm install serve
+                node_modules/.bin/serve -s build &
+                sleep 3
+                npx playwright test --reporter=html
+                '''
+            }
         }        
     }
+
+    
     post {
         always {
-            junit 'test-results/junit.xml'
+            publishHTML([alloowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html'3, 
+            reportName: 'Playwright HEML Report', reportTitles: '', useWrapperFileDirectly: true])
         }
     }
 }
