@@ -25,7 +25,8 @@ pipeline {
                             sh '''
                             echo "with Docker"
                             touch docker-yes.txt
-                ls -al
+                            ls -al
+                            npm --version
                             '''
                           }
             }
