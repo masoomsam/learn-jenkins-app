@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('without Docker') {
+            steps {
+                sh '''
+                echo "without Docker"
+                touch docker-no.txt
+                ls -al
+                '''
+    //            npn --version
+               
+            }
+        }
+            stage('with Docker') {
+                agent {
+                    docker {
+                         image 'node:18-alpine'
+                         reuseNode true
+                    }
+                   
+                }
+                    steps {
+                            sh '''
+                            echo "with Docker"
+                            touch docker-yes.txt
+                ls -al
+                            '''
+                          }
+            }
+    }
+}
